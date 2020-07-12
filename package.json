@@ -1,0 +1,16 @@
+{
+    "name": "gamecabinet",
+    "version": "1.0.0",
+    "description": "project 2: gamecabinet",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Maretta Wight",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "pg": "^8.2.1"
+    }
+}
