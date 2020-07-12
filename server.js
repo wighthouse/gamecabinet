@@ -4,11 +4,12 @@
 
 // const { Pool } = require("pg");
 
-// const connectionString = process.env.DATABASE_URL || "postgres://fhuser:familyhistory@localhost:5432/familyhistory";
-// const pool = new Pool({ connectionString: connectionString });
-// // app.use(express.static(__dirname, 'public'))
-// // app.set('views', path.join(__dirname, 'views'))
-// // app.set('view engine', 'ejs')
+// // const connectionString = process.env.DATABASE_URL || "postgres://";
+// // const pool = new Pool({ connectionString: connectionString });
+// app.use(express.static("public"));
+
+// app.set("views", "views");
+// app.set("view engine", "ejs");
 // app.set("port", (process.env.PORT || 5000));
 
 // app.get("/searchGames/:id", searchGames)
@@ -18,8 +19,7 @@
 //     console.log("Now listening for connection on port: ", app.get("port"));
 // });
 
-//Get the games from the API request
-// request({ url: "https://www.boardgameatlas.com/api/search?limit=12&client_id=MgSCrB3V83" }, function(err, res, jsonString)
+
 
 
 function searchGames() {
