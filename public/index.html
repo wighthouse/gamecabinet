@@ -4,7 +4,7 @@
 <head>
     <title>Games Cabinet</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="server.js"></script>
+    <script src="client-side.js"></script>
 
 </head>
 
@@ -22,6 +22,21 @@
         <ul id="ulResults">
         </ul>
         <img id="imgResults">
+    </div>
+
+
+    <h1>Search your Game Cabinet</h1>
+
+    <p>Please enter a game title to search:</p>
+    <input type="text" id="txtSearchCabinet">
+    <button id="searchCabinet" onclick="searchCabinet();">Search</button>
+
+    <div id="divResultsCabinet">
+        <h2>Results</h2>
+        <h3 id="titleResultsCabinet"></h3>
+        <ul id="ulResultsCabinet">
+        </ul>
+        <img id="imgResultsCabinet">
     </div>
 
 </body>
