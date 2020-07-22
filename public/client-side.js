@@ -3,10 +3,10 @@ function searchGames() {
     var searchString = $('#txtSearch').val();
     console.log('Searching for: ' + searchString);
 
-    // // Set up the parameters to send to the API
+    // Set up the parameters to send to the API
     var params = { name: searchString, client_id: 'MgSCrB3V83' };
     console.log(params);
-    // // Use jQuery to make the get request
+    // Use jQuery to make the get request
     $.get('https://www.boardgameatlas.com/api/search?', params, function(data) {
         // var json = JSON.parse(data);
         // var gameNameList = json.games.map(e => e.name);
@@ -116,6 +116,25 @@ function getDetails(data) {
 
     });
 }
+
+function searchCabinet(req, res) {
+    //get a list of all cabinet games with that name
+    var searchString = $('#txtSearchCabinet').val();
+    console.log('Searching Cabinet for: ' + searchString);
+    // Set up the parameters to send to the DB
+    var params = { name: searchString };
+    console.log(params);
+
+    $.get("/searchCabinet", params, function(data) {
+        console.log("Back from the cabinet with:");
+        console.log(data);
+        updateResultList(data);
+        // for (var i = 0; i < data.list.length; i++) {
+        //     var games = data.list[i];
+        // }
+    });
+}
+
 
 // function addToCabinet(gameInfo) {
 //     $.post("/addGame", gameInfo)

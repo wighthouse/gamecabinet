@@ -1,15 +1,28 @@
-function searchGames(params, callback) {
+const { Pool } = require("pg");
+
+const db_url = process.env.DATABASE_URL;
+//console.log(db_url);
+const pool = new Pool({ connectionString: db_url, ssl: process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0 });
+
+function searchCabinetGames(name, callback) {
     console.log("Searching the API for games with: " + name);
     //search the API for games by name
 
-    var results = {
-        game: [
-            { id: 1, name: "Game1" },
-            { id: 2, name: "Game2" },
-            { id: 3, name: "Game3" }
-        ]
-    }
-    callback(null, results);
+    var sql = "SELECT id, title, published, publisher, min_players, max_players, min_playtime, max_playtime, game_description, official_url, thumb FROM game ";
+
+    pool.query(sql, function(err, db_results) {
+        if (err) {
+            throw err;
+        } else {
+            console.log("Back from the DB with: ");
+            console.log(db_results);
+        }
+        var results = {
+            games: db_results.rows
+        };
+        callback(null, results);
+    });
+
 }
 
 function gameDetails(id, callback) {
@@ -28,7 +41,7 @@ function gameInsert(name, callback) {
 }
 
 module.exports = {
-    searchGames: searchGames,
+    searchCabinetGames: searchCabinetGames,
     gameDetails: gameDetails,
     gameInsert: gameInsert
 }

@@ -30,10 +30,32 @@ function addGame(req, res) {
     });
 }
 
+function searchCabinetGames(req, res) {
+    //get a list of all cabinet games with that name
+    var name = req.query.name;
+    gameModel.searchCabinetGames(name, function(error, results) {
+        res.json(results);
+    });
+
+}
+
+function cabinetGameDetails(req, res) {
+    //get game details for a single game
+    var id = req.params.id;
+    console.log("Getting details for..." + id);
+
+    gameModel.cabinetGameDetails(id, function(error, results) {
+        res.json(results);
+    });
+}
+
+
 module.exports = {
     searchGames: searchGames,
     gameDetails: gameDetails,
-    addGame: addGame
+    addGame: addGame,
+    searchCabinetGames: searchCabinetGames,
+    cabinetGameDetails: cabinetGameDetails
 }
 
 // function search() {
