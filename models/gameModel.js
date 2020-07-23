@@ -5,12 +5,12 @@ const db_url = process.env.DATABASE_URL;
 const pool = new Pool({ connectionString: db_url, ssl: process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0 });
 
 function searchCabinetGames(name, callback) {
-    console.log("Searching the API for games with: " + name);
-    //search the API for games by name
+    console.log("Searching the DB for games with: " + name);
+    //search the DB for games by name
 
-    var sql = "SELECT id, title, published, publisher, min_players, max_players, min_playtime, max_playtime, game_description, official_url, thumb FROM game ";
-
-    pool.query(sql, function(err, db_results) {
+    var sql = "SELECT id, name, published, publisher, min_players, max_players, min_playtime, max_playtime, game_description, official_url, thumb FROM game WHERE name = $1";
+    var params = [name];
+    pool.query(sql, params, function(err, db_results) {
         if (err) {
             throw err;
         } else {
@@ -32,12 +32,26 @@ function gameDetails(id, callback) {
     callback(null, results);
 }
 
-function gameInsert(name, callback) {
+function gameInsert(id, name, published, publisher, min_players, max_players, min_playtime, max_playtime, game_description, official_url, thumb, callback) {
     //add the new game to the cabinet
-    var results = { success: true };
-
-    callback(null, results);
-
+    console.log("Inserting a new game into DB with name of: " + name);
+    //insert a game into DB
+    console.log(published);
+    console.log(id);
+    var sql = "INSERT INTO game (id, name, published, publisher, min_players, max_players, min_playtime, max_playtime, game_description, official_url, thumb) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)";
+    var params = [id, name, published, publisher, min_players, max_players, min_playtime, max_playtime, game_description, official_url, thumb];
+    pool.query(sql, params, function(err, db_results) {
+        if (err) {
+            throw err;
+        } else {
+            console.log("Back from the DB with: ");
+            console.log(db_results);
+        }
+        var results = {
+            games: db_results.rows
+        };
+        callback(null, results);
+    });
 }
 
 module.exports = {

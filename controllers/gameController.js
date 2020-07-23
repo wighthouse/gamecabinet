@@ -21,20 +21,35 @@ function gameDetails(req, res) {
 }
 
 function addGame(req, res) {
+    var id = req.body.id;
     var name = req.body.name;
+    var published = req.body.published;
+    var publisher = req.body.publisher;
+    var min_players = req.body.min_players;
+    var max_players = req.body.max_players;
+    var min_playtime = req.body.min_playtime;
+    var max_playtime = req.body.max_playtime;
+    var game_description = req.body.game_description;
+    var official_url = req.body.official_url;
+    var thumb = req.body.thumb;
+
 
     console.log("Adding a new game to the database with name: " + name);
+    console.log(req.body.description);
 
-    gameModel.gameInsert(name, function(error, results) {
+    gameModel.gameInsert(id, name, published, publisher, min_players, max_players, min_playtime, max_playtime, game_description, official_url, thumb, function(error, results) {
         res.json(results);
+        console.log(results);
     });
 }
 
 function searchCabinetGames(req, res) {
     //get a list of all cabinet games with that name
     var name = req.query.name;
+    console.log("Searching cabinet for: " + name);
     gameModel.searchCabinetGames(name, function(error, results) {
         res.json(results);
+
     });
 
 }

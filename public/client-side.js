@@ -74,6 +74,7 @@ function getDetails(data) {
     button.remove();
 
     var params = {
+        id: data.games[0].id,
         name: data.games[0].name,
         published: data.games[0].year_published,
         publisher: data.games[0].primary_publisher,
@@ -85,6 +86,7 @@ function getDetails(data) {
         description: data.games[0].description,
         official: data.games[0].official_url
     }
+    console.log(params);
     var gameInfo = $.param(params);
     console.log(gameInfo);
     var name = data.games[0].name;
@@ -110,8 +112,8 @@ function getDetails(data) {
     image.after("<button class='addToCabinet' id='" + name + "'>Add " + name + " to Cabinet</button>");
 
     $(".addToCabinet").click(function() {
-        console.log(gameInfo);
-        $.post("/addGame", gameInfo)
+        console.log(params);
+        $.post("/addGame", params)
             // addToCabinet(gameInfo);
 
     });
